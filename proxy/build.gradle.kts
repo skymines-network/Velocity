@@ -4,6 +4,8 @@ plugins {
     application
     id("velocity-init-manifest")
     alias(libs.plugins.shadow)
+//    `java-library`
+//    id("velocity-publish")
 }
 
 application {
