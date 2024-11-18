@@ -94,6 +94,15 @@ tasks {
         dependsOn(configurateBuildTask)
         from(zipTree(configurateBuildTask.map { it.outputs.files.singleFile }))
     }
+
+    runShadow {
+        workingDir = file("run").also(File::mkdirs)
+        standardInput = System.`in`
+    }
+    named<JavaExec>("run") {
+        workingDir = file("run").also(File::mkdirs)
+        standardInput = System.`in` // Doesn't work?
+    }
 }
 
 dependencies {
@@ -120,7 +129,7 @@ dependencies {
     runtimeOnly(libs.disruptor)
     implementation(libs.fastutil)
     implementation(platform(libs.adventure.bom))
-    implementation("net.kyori:adventure-nbt")
+    implementation(libs.adventure.text.serializer.json.legacy.impl)
     implementation(libs.adventure.facet)
     implementation(libs.completablefutures)
     implementation(libs.nightconfig)
